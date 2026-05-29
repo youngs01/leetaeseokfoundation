@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 import { cookies } from "next/headers"
 import { markInquiryAsRead } from "@/lib/inquiry-store"
+import { isDbAvailable } from '@/lib/db'
 
 export async function PATCH(
   req: Request,
@@ -14,6 +15,10 @@ export async function PATCH(
 
     const body = await req.json()
     const isRead = body?.isRead ?? true
+    if (!isDbAvailable) {
+      // DB not available — simulate success response
+      return NextResponse.json({ id: params.id, isRead })
+    }
 
     const inquiry = await markInquiryAsRead(params.id, isRead)
     return NextResponse.json(inquiry)
