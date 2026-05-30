@@ -33,11 +33,11 @@ const POPUP_OVERRIDES_STORAGE_KEY = "popup-overrides"
 export const POPUP_ITEMS: PopupItem[] = [
   {
     id: "1",
-    title: "팝업",
+    title: "제2회 이태석 글로벌 리더십스쿨 참자자 모집",
     summary: "",
     description:
       "지원서 및 학부모 동의서",
-    popupImageSrc: "1pOfvKU_AcySc9Ou_WgOlyvmtz5EVr_YV", // 팝업 이미지
+    popupImageSrc: "1AsIR7JxIwf_VAVcrD9b0hOxQ8-_Mwl1h", // 팝업 이미지
     detailImageSrc: "1EtRwZW2ShkH3PEU5tydIhIoiQundr13h", // 상세 페이지 이미지
     imageAlt: "팝업 자료 이미지",
     pagePath: "/popup/1",
