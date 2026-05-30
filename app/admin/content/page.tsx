@@ -1,6 +1,7 @@
 "use client"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import ContentEditor from "@/components/admin/content-editor"
+import PopupConfigEditor from "@/components/admin/popup-config-editor"
 
 export default function ContentAdminPage() {
   // This would typically save to a database or API
@@ -15,7 +16,7 @@ export default function ContentAdminPage() {
       <h1 className="text-3xl font-bold mb-8">콘텐츠 관리</h1>
 
       <Tabs defaultValue="foundation">
-        <TabsList className="grid grid-cols-7 w-full max-w-4xl mb-8">
+        <TabsList className="grid grid-cols-8 w-full max-w-4xl mb-8">
           <TabsTrigger value="foundation">재단 소식</TabsTrigger>
           <TabsTrigger value="lecture">강연 소식</TabsTrigger>
           <TabsTrigger value="press">언론 보도</TabsTrigger>
@@ -23,6 +24,7 @@ export default function ContentAdminPage() {
           <TabsTrigger value="gallery">갤러리</TabsTrigger>
           <TabsTrigger value="books-movies">책/영화</TabsTrigger>
           <TabsTrigger value="letter">감사 편지</TabsTrigger>
+          <TabsTrigger value="popup">팝업 설정</TabsTrigger>
         </TabsList>
 
         <TabsContent value="foundation">
@@ -51,6 +53,10 @@ export default function ContentAdminPage() {
 
         <TabsContent value="letter">
           <ContentEditor contentType="letter" onSave={(content) => handleSaveContent("letter", content)} />
+        </TabsContent>
+
+        <TabsContent value="popup">
+          <PopupConfigEditor />
         </TabsContent>
       </Tabs>
 
