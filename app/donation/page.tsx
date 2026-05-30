@@ -53,12 +53,19 @@ export default function DonationPage() {
   return (
     <main className="min-h-screen">
       {/* 히어로 섹션 */}
-      <section className="bg-primary text-white py-16 md:py-24">
+      <section className="bg-gradient-to-r from-primary to-indigo-600 text-white py-16 md:py-24">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-3xl md:text-4xl font-bold mb-4">후원 참여</h1>
           <p className="text-lg md:text-xl max-w-2xl mx-auto">
             여러분의 소중한 후원은 이태석 신부님의 정신을 이어받아 소외된 이웃들에게 희망을 전하는 데 사용됩니다
           </p>
+          <div className="mt-8 flex justify-center">
+            <Button asChild className="shadow-lg px-8 py-3" size="lg">
+              <a href="https://secure.donus.org/leetaeseok/pay/step1" target="_blank" rel="noopener noreferrer">
+                지금 후원하기
+              </a>
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -67,7 +74,7 @@ export default function DonationPage() {
         <div className="container mx-auto px-4">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-12">후원 방법 안내</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             <Card className="hover:shadow-lg transition-shadow">
               <CardHeader>
                 <div className="flex items-center gap-3">
@@ -84,11 +91,7 @@ export default function DonationPage() {
               </CardContent>
               <CardFooter>
                 <Button asChild variant="outline" className="w-full border-primary text-primary hover:bg-primary/10">
-                  <a
-                    href="https://mrmweb.hsit.co.kr/v2/?server=WtSZ7Ky71d8XPjUJAVzyGQ==&action=once2"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href="https://secure.donus.org/leetaeseok/pay/step1" target="_blank" rel="noopener noreferrer">
                     일시 후원하기
                   </a>
                 </Button>
@@ -111,11 +114,7 @@ export default function DonationPage() {
               </CardContent>
               <CardFooter className="flex flex-col gap-2">
                 <Button asChild variant="outline" className="w-full border-primary text-primary hover:bg-primary/10">
-                  <a
-                    href="https://mrmweb.hsit.co.kr/v2/?server=WtSZ7Ky71d8XPjUJAVzyGQ==&action=join"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href="https://secure.donus.org/leetaeseok/pay/step1" target="_blank" rel="noopener noreferrer">
                     정기 후원하기
                   </a>
                 </Button>
@@ -130,30 +129,7 @@ export default function DonationPage() {
               </CardFooter>
             </Card>
 
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <div className="flex items-center gap-3">
-                  <div className="bg-primary/10 p-2 rounded-full">
-                    <FileText className="h-6 w-6 text-primary" />
-                  </div>
-                  <CardTitle>납부내역/영수증</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-4">후원 납부내역을 확인하고 기부금 영수증을 발급받으세요.</p>
-              </CardContent>
-              <CardFooter>
-                <Button asChild variant="outline" className="w-full border-primary text-primary hover:bg-primary/10">
-                  <a
-                    href="https://mrmweb.hsit.co.kr/v2/?server=WtSZ7Ky71d8XPjUJAVzyGQ==&action=receipt"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    납부내역 확인
-                  </a>
-                </Button>
-              </CardFooter>
-            </Card>
+            {/* 납부내역/영수증 카드는 제거됨 */}
           </div>
         </div>
       </section>
