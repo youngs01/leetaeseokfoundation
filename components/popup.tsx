@@ -79,7 +79,7 @@ export function Popups() {
               onClose={closePopup1}
               onCloseForToday={closePopup1ForToday}
               imageSrc="/placeholder.svg?height=360&width=380"
-              imageAlt="팝업 이미지 1"
+              imageAlt="https://drive.google.com/file/d/1EtRwZW2ShkH3PEU5tydIhIoiQundr13h/view?usp=sharing"
             />
             <PopupCard
               show={ENABLE_POPUP2 && showPopup2}
