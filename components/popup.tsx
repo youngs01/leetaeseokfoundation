@@ -9,7 +9,7 @@ import { usePopup } from "@/components/popup-context"
 
 // 팝업 활성화 여부
 const ENABLE_POPUP1 = true
-const ENABLE_POPUP2 = true
+const ENABLE_POPUP2 = false
 
 // 재사용 가능한 PopupCard 컴포넌트
 function PopupCard({
