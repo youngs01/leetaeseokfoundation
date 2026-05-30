@@ -7,9 +7,18 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { usePopup } from "@/components/popup-context"
 
-// 팝업 활성화 여부
-const ENABLE_POPUP1 = true
-const ENABLE_POPUP2 = false
+const POPUP_COUNT = 1 // 1 또는 2로 설정하세요
+
+const POPUP_CONFIG = [
+  {
+    imageSrc: "https://drive.google.com/uc?export=view&id=1EtRwZW2ShkH3PEU5tydIhIoiQundr13h",
+    imageAlt: "팝업 이미지 1",
+  },
+  {
+    imageSrc: "https://drive.google.com/uc?export=view&id=YOUR_IMAGE_ID_2",
+    imageAlt: "팝업 이미지 2",
+  },
+]
 
 // 재사용 가능한 PopupCard 컴포넌트
 function PopupCard({
@@ -28,7 +37,7 @@ function PopupCard({
   if (!show) return null
 
   return (
-    <Card className="w-full max-w-[380px] relative overflow-hidden">
+    <Card className="w-full max-w-[450px] relative overflow-hidden">
       <Button
         variant="ghost"
         size="icon"
@@ -38,7 +47,7 @@ function PopupCard({
         <X className="h-4 w-4" />
       </Button>
       <CardContent className="p-0">
-        <div className="relative w-full h-[360px]">
+        <div className="relative w-full h-[650px]">
           <Image src={imageSrc || "/placeholder.svg"} alt={imageAlt} fill className="object-cover" />
         </div>
       </CardContent>
@@ -60,7 +69,11 @@ export function Popups() {
   const isHomePage = pathname === "/"
 
   const { showPopup1, showPopup2, closePopup1, closePopup2, closePopup1ForToday, closePopup2ForToday } = usePopup()
-  const isAnyPopupShowing = (ENABLE_POPUP1 && showPopup1) || (ENABLE_POPUP2 && showPopup2)
+  const popupStates = [showPopup1, showPopup2]
+  const closeHandlers = [closePopup1, closePopup2]
+  const closeTodayHandlers = [closePopup1ForToday, closePopup2ForToday]
+  const activePopupConfig = POPUP_CONFIG.slice(0, POPUP_COUNT)
+  const isAnyPopupShowing = activePopupConfig.some((_, index) => popupStates[index])
 
   // Only show popups on the home page
   if (!isHomePage) return null
@@ -70,24 +83,25 @@ export function Popups() {
       {isAnyPopupShowing && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
-          onKeyDown={(e) => e.key === "Escape" && (showPopup1 ? closePopup1() : closePopup2())}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") {
+              const activeIndex = popupStates.findIndex(Boolean)
+              if (activeIndex !== -1) closeHandlers[activeIndex]()
+            }
+          }}
           tabIndex={-1}
         >
           <div className="container flex flex-col md:flex-row gap-4 justify-center items-center px-4 max-h-[90vh] overflow-y-auto">
-            <PopupCard
-              show={ENABLE_POPUP1 && showPopup1}
-              onClose={closePopup1}
-              onCloseForToday={closePopup1ForToday}
-              imageSrc="/placeholder.svg?height=360&width=380"
-              imageAlt="https://drive.google.com/file/d/1EtRwZW2ShkH3PEU5tydIhIoiQundr13h/view?usp=sharing"
-            />
-            <PopupCard
-              show={ENABLE_POPUP2 && showPopup2}
-              onClose={closePopup2}
-              onCloseForToday={closePopup2ForToday}
-              imageSrc="/placeholder.svg?height=360&width=380"
-              imageAlt="팝업 이미지 2"
-            />
+            {activePopupConfig.map((popup, index) => (
+              <PopupCard
+                key={index}
+                show={popupStates[index]}
+                onClose={closeHandlers[index]}
+                onCloseForToday={closeTodayHandlers[index]}
+                imageSrc={popup.imageSrc}
+                imageAlt={popup.imageAlt}
+              />
+            ))}
           </div>
         </div>
       )}
